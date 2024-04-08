@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/DetailsFragment">
+    <fragment
+        android:id="@+id/DetailsFragment"
+        android:name="com.openclassrooms.tajmahal.ui.restaurant.DetailsFragment"
+        android:label="Details"
+        tools:layout="@layout/fragment_details">
+        <action
+            android:id="@+id/action_DetailsFragment_to_ReviewsFragment"
+            app:destination="@id/ReviewsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ReviewsFragment"
+        android:name="com.openclassrooms.tajmahal.ui.restaurant.ReviewsFragment"
+        android:label="Reviews"
+        tools:layout="@layout/fragment_reviews" >
+        <action
+            android:id="@+id/action_ReviewsFragment_to_DetailsFragment"
+            app:destination="@id/DetailsFragment" />
+    </fragment>
+</navigation>

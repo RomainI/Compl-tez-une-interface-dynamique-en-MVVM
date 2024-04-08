@@ -34,6 +34,111 @@
             tools:text="Taj Mahal" />
 
         <TextView
+            android:id="@+id/average_notation"
+            android:layout_width="42dp"
+            android:layout_height="30dp"
+            android:textSize="24sp"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="19dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRestaurantName"
+            app:layout_constraintBottom_toTopOf="@id/average_ratingbar"
+            android:textAlignment="center"
+            android:text="4.0"
+            />
+        <RatingBar
+            android:id="@+id/average_ratingbar"
+            android:layout_width="78.72dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/tvRestaurantName"
+            app:layout_constraintTop_toBottomOf="@+id/average_notation"
+            app:layout_constraintBottom_toTopOf="@id/number_review"
+            android:layout_marginTop="5.41dp"
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:theme="@style/RatingBar"
+            />
+        
+        <TextView
+            android:id="@+id/number_review"
+            android:layout_width="30.46dp"
+            android:layout_height="14.06dp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@id/average_ratingbar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/leave_comment_textview"
+            android:textAlignment="center"
+            android:layout_marginTop="13.51dp"
+            android:layout_marginLeft="44dp"
+            android:text="(255)"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressbar_fivestars"
+            android:layout_width="211dp"
+            android:layout_height="3dp"
+            app:layout_constraintTop_toTopOf="@id/average_notation"
+            app:layout_constraintBottom_toTopOf="@+id/progressbar_fourstars"
+            app:layout_constraintRight_toRightOf="@id/tvRestaurantHours"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:theme="@style/RatingBar"
+            />
+
+        <ProgressBar
+            android:id="@+id/progressbar_fourstars"
+            android:layout_width="211dp"
+            android:layout_height="3dp"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_fivestars"
+            app:layout_constraintBottom_toTopOf="@+id/progressbar_threestars"
+            app:layout_constraintRight_toRightOf="@id/tvRestaurantHours"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:theme="@style/RatingBar"
+            />
+        <ProgressBar
+            android:id="@+id/progressbar_threestars"
+            android:layout_width="211dp"
+            android:layout_height="3dp"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_fourstars"
+            app:layout_constraintBottom_toTopOf="@+id/progressbar_twostars"
+            app:layout_constraintRight_toRightOf="@id/tvRestaurantHours"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:theme="@style/RatingBar"
+            />
+        <ProgressBar
+            android:id="@+id/progressbar_twostars"
+            android:layout_width="211dp"
+            android:layout_height="3dp"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_threestars"
+            app:layout_constraintBottom_toTopOf="@+id/progressbar_onestar"
+            app:layout_constraintRight_toRightOf="@id/tvRestaurantHours"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:theme="@style/RatingBar"
+            />
+        <ProgressBar
+            android:id="@+id/progressbar_onestar"
+            android:layout_width="211dp"
+            android:layout_height="3dp"
+            app:layout_constraintTop_toBottomOf="@id/progressbar_twostars"
+            app:layout_constraintBottom_toTopOf="@+id/leave_comment_textview"
+            app:layout_constraintRight_toRightOf="@id/tvRestaurantHours"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:theme="@style/RatingBar"
+
+            />
+    <TextView
+        android:id="@+id/leave_comment_textview"
+        android:layout_width="82dp"
+        android:layout_height="15dp"
+        app:layout_constraintRight_toRightOf="@id/progressbar_onestar"
+        app:layout_constraintTop_toBottomOf="@id/progressbar_onestar"
+        app:layout_constraintBottom_toTopOf="@id/separator"
+        android:textSize="12sp"
+        android:text="Leave a review"
+        />
+
+
+
+        <TextView
             android:id="@+id/tvRestaurantType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -96,7 +201,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tvRestaurantHours"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRestaurantName" />
+            app:layout_constraintTop_toBottomOf="@id/leave_comment_textview" />
 
         <ImageView
             android:id="@+id/icon_hours"
@@ -250,5 +355,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tvRestaurantPhoneNumber" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

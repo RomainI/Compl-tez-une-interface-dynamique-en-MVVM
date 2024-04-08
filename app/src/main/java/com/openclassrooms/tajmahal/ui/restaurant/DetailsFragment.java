@@ -8,8 +8,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,10 @@ import android.widget.Toast;
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.databinding.FragmentDetailsBinding;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
+import com.openclassrooms.tajmahal.domain.model.Review;
+import com.openclassrooms.tajmahal.ui.MainActivity;
+
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -36,6 +44,7 @@ public class DetailsFragment extends Fragment {
     private FragmentDetailsBinding binding;
 
     private DetailsViewModel detailsViewModel;
+
 
     /**
      * This method is called when the fragment is first created.
@@ -117,10 +126,60 @@ public class DetailsFragment extends Fragment {
         binding.tvRestaurantPhoneNumber.setText(restaurant.getPhoneNumber());
         binding.chipOnPremise.setVisibility(restaurant.isDineIn() ? View.VISIBLE : View.GONE);
         binding.chipTakeAway.setVisibility(restaurant.isTakeAway() ? View.VISIBLE : View.GONE);
-
         binding.buttonAdress.setOnClickListener(v -> openMap(restaurant.getAddress()));
         binding.buttonPhone.setOnClickListener(v -> dialPhoneNumber(restaurant.getPhoneNumber()));
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
+
+        binding.numberReview.setText("("+detailsViewModel.getArrayReviews().getValue().size()+")");
+        binding.averageNotation.setText(""+average(detailsViewModel.getArrayReviews().getValue()));
+        binding.averageRatingbar.setRating(average(detailsViewModel.getArrayReviews().getValue()));
+
+        binding.progressbarFivestars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),5));
+        binding.progressbarFourstars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),4));
+        binding.progressbarThreestars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),3));
+        binding.progressbarTwostars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),2));
+        binding.progressbarOnestar.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),1));
+        binding.leaveCommentTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //NavHostFragment.findNavController().navigate(R.id.action_DetailsFragment_to_ReviewsFragment);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ReviewsFragment reviewsFragment = ReviewsFragment.newInstance();
+                fragmentTransaction.replace(R.id.container, reviewsFragment);
+                fragmentTransaction.commit();
+
+            }
+        });
+    }
+
+    /**
+     *
+     * @param reviews
+     * @return average notation of reviews
+     */
+    private float average(List<Review> reviews){
+        float averageNotation=0;
+        float sum=0;
+        for (Review r : reviews) {
+            sum=sum+r.getRate();
+
+        }
+        averageNotation=sum/reviews.size();
+        return averageNotation;
+    }
+
+
+    private int getRatePercent(List<Review> reviews,int notation){
+        int number = 0;
+        int index = 0;
+        int percent=0;
+        for (Review r : reviews) {
+            if (reviews.get(index).getRate()==notation) number++;
+            index++;
+        }
+        percent=number*100/reviews.size();
+        return percent;
     }
 
     /**
