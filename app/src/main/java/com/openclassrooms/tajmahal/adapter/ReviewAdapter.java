@@ -1,6 +1,7 @@
 package com.openclassrooms.tajmahal.adapter;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.openclassrooms.tajmahal.R;
 import com.openclassrooms.tajmahal.domain.model.Review;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -59,7 +61,11 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         public void bind(Review r) {
             textViewName.setText(r.getUsername());
             textViewComment.setText(r.getComment());
-            imageViewAvatar.setImageResource(r.getPicture().hashCode());
+
+            Log.d("Picture", "bind: "+r.getPicture());
+            //imageViewAvatar.setImageResource(r.getPicture());
+
+            Picasso.get().load(r.getPicture()).into(imageViewAvatar);
             ratingBar.setRating(r.getRate());
         }
     }

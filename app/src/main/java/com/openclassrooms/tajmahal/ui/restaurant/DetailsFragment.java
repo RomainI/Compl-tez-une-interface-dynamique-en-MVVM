@@ -147,6 +147,7 @@ public class DetailsFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ReviewsFragment reviewsFragment = ReviewsFragment.newInstance();
                 fragmentTransaction.replace(R.id.container, reviewsFragment);
+                fragmentTransaction.addToBackStack("DetailsFragment");
                 fragmentTransaction.commit();
 
             }

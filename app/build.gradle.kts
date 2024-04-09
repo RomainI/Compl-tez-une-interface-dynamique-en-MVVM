@@ -43,6 +43,7 @@ dependencies {
 
 //Hilt
     implementation("com.google.dagger:hilt-android:${hiltVersion}")
+    implementation ("com.squareup.picasso:picasso:2.8")
     annotationProcessor("com.google.dagger:hilt-compiler:${hiltVersion}")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
