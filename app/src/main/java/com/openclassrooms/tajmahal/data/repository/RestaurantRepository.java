@@ -7,6 +7,7 @@ import com.openclassrooms.tajmahal.data.service.RestaurantApi;
 import com.openclassrooms.tajmahal.domain.model.Restaurant;
 import com.openclassrooms.tajmahal.domain.model.Review;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
