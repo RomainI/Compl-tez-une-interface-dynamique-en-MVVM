@@ -131,8 +131,8 @@ public class DetailsFragment extends Fragment {
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
 
         binding.numberReview.setText("("+detailsViewModel.getArrayReviews().getValue().size()+")");
-        binding.averageNotation.setText(""+average(detailsViewModel.getArrayReviews().getValue()));
-        binding.averageRatingbar.setRating(average(detailsViewModel.getArrayReviews().getValue()));
+        binding.averageNotation.setText(""+getAverage(detailsViewModel.getArrayReviews().getValue()));
+        binding.averageRatingbar.setRating(getAverage(detailsViewModel.getArrayReviews().getValue()));
 
         binding.progressbarFivestars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),5));
         binding.progressbarFourstars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),4));
@@ -159,7 +159,7 @@ public class DetailsFragment extends Fragment {
      * @param reviews
      * @return average notation of reviews
      */
-    private float average(List<Review> reviews){
+    private float getAverage(List<Review> reviews){
         float averageNotation=0;
         float sum=0;
         for (Review r : reviews) {
@@ -170,7 +170,11 @@ public class DetailsFragment extends Fragment {
         return averageNotation;
     }
 
-
+    /**
+     *
+     * @param reviews
+     * @return rate based on a percentage
+     */
     private int getRatePercent(List<Review> reviews,int notation){
         int number = 0;
         int index = 0;

@@ -18,7 +18,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
-
+/**
+ * ReviewViewModel is responsible for preparing and managing the data for the {@link ReviewsFragment}.
+ * It communicates with the {@link RestaurantRepository} to fetch review and restaurant details and provides
+ * utility methods related to the restaurant UI.
+ *
+ * This ViewModel is integrated with Hilt for dependency injection.
+ */
 @HiltViewModel
 public class ReviewViewModel extends ViewModel {
 
@@ -48,6 +54,12 @@ public class ReviewViewModel extends ViewModel {
         return restaurantRepository.getRestaurant().getValue().getName();
     }
 
+
+    /**
+     * Create a Review from parameters and add it to pileReview
+     * @param name,picture,comment,rate
+     *
+     */
     public void addComment(String name, String picture, String comment, int rate) {
         Review r = new Review( name, picture, comment, rate);
         List<Review> reviewList = new ArrayList<>();
@@ -57,14 +69,6 @@ public class ReviewViewModel extends ViewModel {
     }
 
 
-    //TODO
-   /** public void setListReviews(List<Review> reviewList) {
-        restaurantRepository.getReviews().setValue(reviewList);
-    }
-    /**
-     * Retrieves the current day of the week in French.
-     *
-     * @return A string representing the current day of the week in French.
-     */
+
 
 }
