@@ -148,6 +148,10 @@ public class ReviewsFragment extends Fragment {
      * called to go back on the previous fragment
      */
     private void back(){
-        getParentFragmentManager().popBackStack();
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        DetailsFragment detailsFragment = DetailsFragment.newInstance();
+        fragmentTransaction.replace(R.id.container, detailsFragment);
+        fragmentTransaction.commit();
     }
 }

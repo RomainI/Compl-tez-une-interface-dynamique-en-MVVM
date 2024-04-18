@@ -59,7 +59,8 @@
             android:numStars="5"
             android:stepSize="1"
             android:isIndicator="true"
-            style="@style/RatingBar"
+            android:theme="@style/RatingBar"
+            style="?android:attr/ratingBarStyleSmall"
             />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

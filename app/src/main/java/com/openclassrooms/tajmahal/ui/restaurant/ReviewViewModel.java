@@ -61,11 +61,9 @@ public class ReviewViewModel extends ViewModel {
      *
      */
     public void addComment(String name, String picture, String comment, int rate) {
-        Review r = new Review( name, picture, comment, rate);
-        List<Review> reviewList = new ArrayList<>();
-        reviewList.addAll(getArrayReviews().getValue());
-        reviewList.add(0,r);
-        pileReview.setValue(reviewList);
+        Review review = new Review( name, picture, comment, rate);
+        restaurantRepository.addReview(review);
+
     }
 
 

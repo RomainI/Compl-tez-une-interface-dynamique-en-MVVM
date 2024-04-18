@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -45,6 +46,8 @@ public class DetailsFragment extends Fragment {
 
     private DetailsViewModel detailsViewModel;
 
+    private float notation;
+    private List<Review> reviews;
 
     /**
      * This method is called when the fragment is first created.
@@ -129,25 +132,26 @@ public class DetailsFragment extends Fragment {
         binding.buttonAdress.setOnClickListener(v -> openMap(restaurant.getAddress()));
         binding.buttonPhone.setOnClickListener(v -> dialPhoneNumber(restaurant.getPhoneNumber()));
         binding.buttonWebsite.setOnClickListener(v -> openBrowser(restaurant.getWebsite()));
+        reviews = detailsViewModel.getArrayReviews().getValue();
+        notation=getAverage(reviews);
+        binding.numberReview.setText("("+reviews.size()+")");
+        binding.averageNotation.setText(""+notation);
 
-        binding.numberReview.setText("("+detailsViewModel.getArrayReviews().getValue().size()+")");
-        binding.averageNotation.setText(""+getAverage(detailsViewModel.getArrayReviews().getValue()));
-        binding.averageRatingbar.setRating(getAverage(detailsViewModel.getArrayReviews().getValue()));
-
-        binding.progressbarFivestars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),5));
-        binding.progressbarFourstars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),4));
-        binding.progressbarThreestars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),3));
-        binding.progressbarTwostars.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),2));
-        binding.progressbarOnestar.setProgress(getRatePercent(detailsViewModel.getArrayReviews().getValue(),1));
+        binding.averageRatingbar.setRating(notation);
+        Log.d("Rating bar rate", "updateUIWithRestaurant: "+binding.averageRatingbar.getRating());
+        binding.progressbarFivestars.setProgress(getRatePercent(reviews,5));
+        binding.progressbarFourstars.setProgress(getRatePercent(reviews,4));
+        binding.progressbarThreestars.setProgress(getRatePercent(reviews,3));
+        binding.progressbarTwostars.setProgress(getRatePercent(reviews,2));
+        binding.progressbarOnestar.setProgress(getRatePercent(reviews,1));
+        Log.d("notation 1 star", "updateUIWithRestaurant: "+getRatePercent(reviews,1));
         binding.leaveCommentTextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //NavHostFragment.findNavController().navigate(R.id.action_DetailsFragment_to_ReviewsFragment);
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ReviewsFragment reviewsFragment = ReviewsFragment.newInstance();
                 fragmentTransaction.replace(R.id.container, reviewsFragment);
-                fragmentTransaction.addToBackStack("DetailsFragment");
                 fragmentTransaction.commit();
 
             }

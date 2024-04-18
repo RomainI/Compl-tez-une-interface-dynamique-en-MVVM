@@ -78,9 +78,10 @@
                 android:id="@+id/stars"
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"
-                android:rating="4"
-                android:stepSize="10"
-                style="@style/RatingBar"
+                android:rating="1"
+                android:isIndicator="false"
+                android:theme="@style/RatingBar"
+                style="?android:attr/ratingBarStyleSmall"
                 />
 
 
