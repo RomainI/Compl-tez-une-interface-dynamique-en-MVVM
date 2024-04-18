@@ -42,12 +42,7 @@ public class ReviewsFragmentTest extends TestCase {
         // Assert
         assertEquals(expectedReviews, mRestaurantRepository.getReviews().getValue());
     }
-
-
-    //TODO getComment
-    //TODO remettre les etoiles en style défaut
-    //Voir affichage étoiles page détails
-    //Corriger pile review (ordre)
+    
 
 
 }
