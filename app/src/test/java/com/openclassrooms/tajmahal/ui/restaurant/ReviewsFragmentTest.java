@@ -42,7 +42,25 @@ public class ReviewsFragmentTest extends TestCase {
         // Assert
         assertEquals(expectedReviews, mRestaurantRepository.getReviews().getValue());
     }
-    
+
+    @Test
+    public void testGetComment(){
+        //Arrange
+        Review newReview1 = new Review("Review1","P1","C1",5);
+        Review newReview2 = new Review("Review2", "P2", "C2", 4);
+        List<Review> expectedReviews = new ArrayList<>();
+        expectedReviews.add(newReview1);
+        expectedReviews.add(newReview2);
+        when(mRestaurantRepository.getReviews()).thenReturn(new MutableLiveData<>(expectedReviews));
+
+        // Act
+        List<Review> actualReviews = mRestaurantRepository.getReviews().getValue();
+
+        // Assert
+        assertEquals(newReview1,actualReviews.get(0));
+        assertEquals(newReview2,actualReviews.get(1));
+
+    }
 
 
 }
